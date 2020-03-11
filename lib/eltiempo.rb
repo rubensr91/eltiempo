@@ -1,16 +1,25 @@
-require "eltiempo"
-require 'thor'
+load 'lib/api_weather.rb'
 
+class EltiempoCLI 
 
-module Eltiempo
-  class CLI < Thor
-    desc "hello [name]", "say my name"
-    def hello(name)
-      if name == "Heisenberg"
-        puts "you are goddman right"
-      else
-        puts "say my name"
-      end
+  def self.start(argv)
+
+    command = argv[0]
+    province = argv[1]
+
+    if (argv.empty?) || (command.eql? "help")
+      puts "Try eltiempo -av_max 'Gavá'"
+    elsif (command == "-av_max") 
+      temp = ApiWeather.get_max_temp(province)
+      puts "The maximum temperature of the week in #{province} is #{temp}°C"
+    elsif (command == "-av_min")
+      temp = ApiWeather.get_min_temp(province)
+      puts "The minimum temperature of the week in #{province} is #{temp}°C"
+    elsif (command == "-today")
+      temp = ApiWeather.get_today_temp(province)
+      puts "The minimum temperature of the week in #{province} is #{temp}°C"
+    else
+      puts "Command not accepted. \nRun 'eltiempo help' for more details."
     end
   end
 end

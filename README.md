@@ -2,19 +2,18 @@
 
 CLI in ruby to know the weather of the cities of Barcelona
 
-I'm using Thor dependency to do the CLI part.
-https://github.com/erikhuda/thor
+I have not used any external code to do the CLI part, so, is not perfect, but
+it's working, and I can control everything that could happen.
+
+I'm using net/http to access to the external API.
+
+I'm using Nokogiri to access to the XML data.
+https://github.com/sparklemotion/nokogiri
 
 ## Installation
 
-It's really easy to implement this tool inside our Ruby project. Just need to follow this steps :
 ```ruby
-Add Thor to our .gemspec file
-spec.add_dependency "thor", "~> 1.0.1"
-
-    $ chmod +x exe/eltiempo
-    $ bundle exec exe/eltiempo
-    $ rake install 
+    $ bundle exec rake install
 ```
 
 ## Usage

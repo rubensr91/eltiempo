@@ -2,4 +2,4 @@
 
 require "eltiempo"
 
-Eltiempo::CLI.start(ARGV)
+EltiempoCLI.start(ARGV)
