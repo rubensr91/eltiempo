@@ -56,7 +56,7 @@ class ApiWeather
         @temp_min
     end
 
-    def self.get_day_temp(province)
+    def self.get_today_temp(province)
 
         get_province_url(province)
 
@@ -66,13 +66,13 @@ class ApiWeather
 
         doc.xpath('//var').each do |var|
 
-            if (var.at_xpath('name').content.to_s.eql? 'Día') || (var.at_xpath('name').content.to_s.eql? 'Day')
+            if (var.at_xpath('name').content.to_s.eql? 'Definición de Atmosfera') || (var.at_xpath('name').content.to_s.eql? 'Atmospheric condition')
                 values = []
                 var.search('forecast').each do |forecast|
-                    #TODO where is the data?
+                    values << forecast["value"]
                 end
                 
-                @temp_today = 0
+                @temp_today = values[0]
             end
         end
 
@@ -87,9 +87,8 @@ class ApiWeather
 
         doc = Nokogiri::XML(xml_body)
         doc.xpath('//data').each do |data|
-            provincia = data.at_xpath('name').content
 
-            if provincia.to_s.eql? province
+            if data.at_xpath('name').content.to_s.eql? province
                 @province_url = data.at_xpath('url').content.concat(@affiliate_id)
             end
         end
