@@ -72,8 +72,7 @@ class ApiWeather
 
         doc = Nokogiri::XML(xml_body)
         doc.xpath('//data').each do |data|
-
-            if data.at_xpath('name').content.to_s.eql? province
+            if (data.at_xpath('name').content.to_s.eql? province) || (province_url != nil)
                 province_url = data.at_xpath('url').content.concat(@affiliate_id)
             end
         end
